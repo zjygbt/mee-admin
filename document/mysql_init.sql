@@ -59,14 +59,13 @@ CREATE TABLE sys_menu (
   `parent_code` varchar(8) 
 );
 -- alter table test1 modify column field_name int comment '修改后的字段注释';
-COMMENT ON COLUMN sys_menu.`name` IS '菜单名称';
-COMMENT ON COLUMN sys_menu.`show_flag` IS '是否显示(0:否 1:是)';
-COMMENT ON COLUMN sys_menu.`create_date` IS '创建时间';
-COMMENT ON COLUMN sys_menu.`create_by` IS '创建人';
-COMMENT ON COLUMN sys_menu.`code` IS '菜单权限编号';
-COMMENT ON COLUMN sys_menu.`parent_code` IS '菜单权限父编号';
-COMMENT ON TABLE sys_menu IS '系统::菜单表';
-
+alter table sys_menu modify name varchar(100) comment '菜单名称';
+alter table sys_menu modify show_flag numeric(1) comment '是否显示(0:否 1:是)';
+alter table sys_menu modify create_date timestamp(6) comment '创建时间';
+alter table sys_menu modify create_by varchar(64) comment '创建人';
+alter table sys_menu modify code varchar(8)  comment '菜单权限编号';
+alter table sys_menu modify parent_code varchar(8) comment '菜单权限父编号';
+alter table sys_menu comment '系统::菜单表';
 
 INSERT INTO sys_menu VALUES (202008291857220080100002, '用户配置', 1, '2020-08-29 18:57:22.669', 'sys', '040101', '0401');
 INSERT INTO sys_menu VALUES (202001061654540080100005, '系统', 1, '2020-01-06 16:54:54.02', 'sys', '04', NULL);
@@ -97,16 +96,16 @@ CREATE TABLE `sys_role` (
   `status` numeric(1) NOT NULL,
   `create_date` timestamp(6) NOT NULL,
   `update_date` timestamp(6) NOT NULL,
-  `role_desc` varchar(100) 
+  `role_desc` varchar(100)
 )
 ;
-COMMENT ON COLUMN `sys_role`.`id` IS '表ID';
-COMMENT ON COLUMN `sys_role`.`role_name` IS '角色名称';
-COMMENT ON COLUMN `sys_role`.`status` IS '角色状态[0.关闭 1.开启]';
-COMMENT ON COLUMN `sys_role`.`create_date` IS '创建时间';
-COMMENT ON COLUMN `sys_role`.`update_date` IS '更新时间';
-COMMENT ON COLUMN `sys_role`.`role_desc` IS '角色描述';
-COMMENT ON TABLE `sys_role` IS '系统::角色信息表';
+alter table sys_role modify id numeric(24) comment '表ID';
+alter table sys_role modify role_name varchar(50) comment '角色名称';
+alter table sys_role modify status numeric(1) comment '角色状态[0.关闭 1.开启]';
+alter table sys_role modify create_date timestamp(6) comment '创建时间';
+alter table sys_role modify update_date timestamp(6) comment '更新时间';
+alter table sys_role modify role_desc varchar(100) comment '角色描述';
+alter table sys_role comment '系统::角色信息表';
 
 -- ----------------------------
 -- Records of sys_role
@@ -125,8 +124,7 @@ CREATE TABLE `sys_role_menu` (
   `menu_code` varchar(24)  NOT NULL
 )
 ;
-COMMENT ON TABLE `sys_role_menu` IS '系统::角色&菜单表';
-
+alter table sys_role_menu comment '系统::角色&菜单表';
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
@@ -183,7 +181,7 @@ CREATE TABLE `sys_role_user` (
   `role_id` numeric(24) NOT NULL
 )
 ;
-COMMENT ON TABLE `sys_role_user` IS '系统::角色&用户表';
+alter TABLE sys_role_user comment '系统::角色&用户表';
 
 -- ----------------------------
 -- Records of sys_role_user
@@ -210,18 +208,18 @@ CREATE TABLE `sys_user` (
   `create_by` varchar(48)  NOT NULL
 )
 ;
-COMMENT ON COLUMN `sys_user`.`id` IS '表ID';
-COMMENT ON COLUMN `sys_user`.`user_id` IS '用户ID';
-COMMENT ON COLUMN `sys_user`.`nick_name` IS '用户昵称';
-COMMENT ON COLUMN `sys_user`.`user_name` IS '用户名称';
-COMMENT ON COLUMN `sys_user`.`email` IS '用户email(可用于登陆)';
-COMMENT ON COLUMN `sys_user`.`password` IS '用户密码';
-COMMENT ON COLUMN `sys_user`.`register_date` IS '用户注册时间';
-COMMENT ON COLUMN `sys_user`.`last_login_date` IS '最后登录时间';
-COMMENT ON COLUMN `sys_user`.`status` IS '用户登录状态';
-COMMENT ON COLUMN `sys_user`.`create_date` IS '创建时间';
-COMMENT ON COLUMN `sys_user`.`create_by` IS '创建人';
-COMMENT ON TABLE `sys_user` IS '系统::用户信息表';
+alter table sys_user modify id numeric(24) comment '表ID';
+alter table sys_user modify user_id varchar(32) comment '用户ID';
+alter table sys_user modify nick_name varchar(50) comment '用户昵称';
+alter table sys_user modify user_name varchar(50) comment '用户名称';
+alter table sys_user modify email varchar(50) comment '用户email(可用于登陆)';
+alter table sys_user modify password varchar(256) comment '用户密码';
+alter table sys_user modify register_date timestamp(6) comment '用户注册时间';
+alter table sys_user modify last_login_date timestamp(6) comment '最后登录时间';
+alter table sys_user modify status numeric(24) comment '用户登录状态';
+alter table sys_user modify create_date timestamp(6) comment '创建时间';
+alter table sys_user modify create_by varchar(48) comment '创建人';
+alter TABLE sys_user comment '系统::用户信息表';
 
 -- ----------------------------
 -- Records of sys_user
@@ -234,7 +232,6 @@ INSERT INTO `sys_user` VALUES (2, '2', '测试用户', 'test', 'test@mail.com', 
 -- Primary Key structure for table sys_dict
 -- ----------------------------
 ALTER TABLE sys_dict ADD CONSTRAINT `sys_dict_pkey` PRIMARY KEY (`id`);
-
 -- ----------------------------
 -- Uniques structure for table sys_menu
 -- ----------------------------
